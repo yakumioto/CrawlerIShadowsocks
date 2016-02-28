@@ -1,0 +1,2 @@
+# CrawlerIShadowsocks
+用来及时获取Ishadowsocks的免费SS信息。
