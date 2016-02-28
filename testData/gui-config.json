@@ -1,0 +1,26 @@
+{
+"configs" : [
+  {
+"server" : "106.185.49.218",
+"server_port" : 233,
+"password" : "kimjongun",
+"method" : "aes-128-cfb",
+"remarks" : ""},
+  {
+"server" : "106.185.49.218",
+"server_port" : 233,
+"password" : "kimjongun",
+"method" : "aes-128-cfb",
+"remarks" : ""}
+
+],
+"strategy" : "com.shadowsocks.strategy.balancing",
+"index" : -1,
+"global" : false,
+"enabled" : true,
+"shareOverLan" : false,
+"isDefault" : false,
+"localPort" : 1080,
+"pacUrl" : null,
+"useOnlinePac" : false,
+"availabilityStatistics" : false}
