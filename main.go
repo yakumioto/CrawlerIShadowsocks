@@ -1,8 +1,7 @@
 package main
 
-import "log"
-
 func main() {
-	log.Println(ParsePage(GetPage()))
-	AnalysisProfile(ReadProfile("testData/gui-config.json"))
+	configPath := "./gui-config.json"
+	iConfig := ParsePage(GetPage())
+	WriteProfile(configPath, ModifyProfile(AnalysisProfile(ReadProfile(configPath)), ConvertMap(iConfig)))
 }

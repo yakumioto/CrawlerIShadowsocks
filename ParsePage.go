@@ -2,17 +2,18 @@ package main
 
 import (
 	"log"
+	"reflect"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
 type Config struct {
-	Title  string
-	Server string
-	Port   string
-	Passwd string
-	Method string
+	Remarks     string
+	Server      string
+	Server_port string
+	Password    string
+	Method      string
 }
 
 func GetPage() *goquery.Document {
@@ -36,14 +37,14 @@ func ParsePage(doc *goquery.Document) [3]Config {
 
 			switch i {
 			case 0:
-				configArr[count].Title = result[0]
+				configArr[count].Remarks = result[0]
 				configArr[count].Server = result[1]
 				break
 			case 1:
-				configArr[count].Port = result[1]
+				configArr[count].Server_port = result[1]
 				break
 			case 2:
-				configArr[count].Passwd = result[1]
+				configArr[count].Password = result[1]
 				break
 			case 3:
 				configArr[count].Method = result[1]
@@ -64,4 +65,23 @@ func ParsePage(doc *goquery.Document) [3]Config {
 	})
 
 	return configArr
+}
+
+func ConvertMap(conf [3]Config) []interface{} {
+	mapSlice := make([]map[string]interface{}, 3)
+	o := make([]interface{}, 3)
+
+	for i, cf := range conf {
+		tmpMap := make(map[string]interface{})
+		elem := reflect.ValueOf(&cf).Elem()
+		type_ := elem.Type()
+
+		for j := 0; j < type_.NumField(); j++ {
+			tmpMap[strings.ToLower(type_.Field(j).Name)] = elem.Field(j).Interface()
+		}
+
+		mapSlice[i] = tmpMap
+		o[i] = mapSlice[i]
+	}
+	return o
 }

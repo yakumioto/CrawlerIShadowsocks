@@ -15,23 +15,34 @@ func ReadProfile(path string) []byte {
 	return src
 }
 
-func AnalysisProfile(src []byte) {
+func AnalysisProfile(src []byte) *simplejson.Json {
 	json, err := simplejson.NewJson(src)
 	if err != nil {
 		log.Fatal("[ERROR]:", err)
 	}
 
-	configs, ok := json.CheckGet("configs")
-	if !ok {
-		log.Println("0")
+	// configs, ok := json.CheckGet("configs")
+	// if !ok {
+	// 	log.Fatal("[ERROR]:", err)
+	// }
+
+	return json
+}
+
+func ModifyProfile(configs *simplejson.Json, param []interface{}) []byte {
+	configs.Del("configs")
+	configs.Set("configs", param)
+	src, err := configs.MarshalJSON()
+	if err != nil {
+		log.Fatal("[ERROR:]", err)
 	}
-	arr, err := configs.Array()
+	// log.Println(string(src))
+	return src
+}
+
+func WriteProfile(path string, src []byte) {
+	err := ioutil.WriteFile(path, src, 0644)
 	if err != nil {
 		log.Fatal("[ERROR]:", err)
 	}
-
-	for _, config := range arr {
-		log.Println(config)
-	}
-	//log.Println(config)
 }
