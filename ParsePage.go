@@ -18,7 +18,7 @@ type Config struct {
 
 func GetPage() *goquery.Document {
 	for {
-		doc, err := goquery.NewDocument("http://www.ishadowsocks.com/")
+		doc, err := goquery.NewDocument("http://www.ishadowsocks.net")
 		if err != nil {
 			log.Println("[ERROR]:", err)
 		}
