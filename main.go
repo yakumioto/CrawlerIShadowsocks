@@ -12,7 +12,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "Crawlerl shadowoskcs"
 	app.Usage = "Crawlerl http://www.ishadowsocks.net free ss."
-	app.Version = "0.2"
+	app.Version = "2.0"
 
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
